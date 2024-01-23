@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDefinitions("test")
 
-        viewModel.onlineDefinition.observe(viewLifecycleOwner) {
+        viewModel.definition.observe(viewLifecycleOwner) {
             Log.d("SearchFragment", "getDefinitions : $it")
         }
     }

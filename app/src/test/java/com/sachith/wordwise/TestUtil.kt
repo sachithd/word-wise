@@ -1,82 +1,30 @@
 package com.sachith.wordwise
 
-import com.google.gson.Gson
-import com.sachith.wordwise.api.DictionaryApiHelper
-import com.sachith.wordwise.api.DictionaryApiInterface
 import com.sachith.wordwise.api.dto.DefinitionDto
 import com.sachith.wordwise.api.dto.Definitions
 import com.sachith.wordwise.api.dto.License
 import com.sachith.wordwise.api.dto.Meanings
 import com.sachith.wordwise.api.dto.Phonetics
-import kotlinx.coroutines.test.runTest
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Test
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.net.HttpURLConnection
 
-class RepositoryTest {
-
-    private lateinit var mockWebServer: MockWebServer
-    private lateinit var dictionaryApiInterface: DictionaryApiInterface
-    private lateinit var apiHelper: DictionaryApiHelper
-
-    @Before
-    fun setUp() {
-        // Start the MockWebServer
-        mockWebServer = MockWebServer()
-        mockWebServer.start()
-
-        // Create a Retrofit instance with the MockWebServer URL
-        val retrofit = Retrofit.Builder()
-            .baseUrl(mockWebServer.url("/"))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        // Create an instance of your Retrofit service
-        dictionaryApiInterface = retrofit.create(DictionaryApiInterface::class.java)
-
-        apiHelper = DictionaryApiHelper(dictionaryApiInterface)
-    }
-
-    @After
-    fun tearDown() {
-        // Shutdown the MockWebServer
-        mockWebServer.shutdown()
-    }
-
-    @Test
-    fun `can call dictionary api`() = runTest {
-        // Perform the actual API call using your Retrofit service
-        val result = apiHelper.getDefinition("hello")
-
-        // verify the response is OK
-        assertEquals(200, result.code())
-    }
+class TestUtil {
+    companion object {
 
 
-    @Test
-    fun `can get valid definition for word hello`() = runTest {
-
-        val meaningsDefinitions1 = listOf(
+        private val meaningsDefinitions1 = listOf(
             Definitions(
                 definition = "\"Hello!\" or an equivalent greeting.",
                 synonyms = arrayListOf(),
                 antonyms = arrayListOf(),
             )
         )
-        val meaningsDefinitions2 = listOf(
+        private val meaningsDefinitions2 = listOf(
             Definitions(
                 definition = "To greet with \"hello\".",
                 synonyms = arrayListOf(),
                 antonyms = arrayListOf(),
             )
         )
-        val meaningsDefinitions3 = listOf(
+        private val meaningsDefinitions3 = listOf(
             Definitions(
                 definition = "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
                 synonyms = arrayListOf(),
@@ -109,7 +57,7 @@ class RepositoryTest {
             )
         )
 
-        val meanings = listOf(
+        private val meanings = listOf(
             Meanings(
                 partOfSpeech = "noun",
                 definitions = ArrayList(meaningsDefinitions1),
@@ -130,12 +78,12 @@ class RepositoryTest {
             ),
         )
 
-        val phonetics = listOf(
+        private val phonetics = listOf(
             Phonetics(
                 audio = "https://api.dictionaryapi.dev/media/pronunciations/en/hello-au.mp3",
                 sourceUrl = "https://commons.wikimedia.org/w/index.php?curid=75797336",
                 license = License("BY-SA 4.0", "https://creativecommons.org/licenses/by-sa/4.0")
-                ),
+            ),
             Phonetics(
                 text = "/həˈləʊ/",
                 audio = "https://api.dictionaryapi.dev/media/pronunciations/en/hello-uk.mp3",
@@ -148,7 +96,7 @@ class RepositoryTest {
             ),
         )
 
-        val definition = listOf(
+        private val definition = listOf(
             DefinitionDto(
                 word = "hello",
                 phonetics = ArrayList(phonetics),
@@ -158,26 +106,9 @@ class RepositoryTest {
             ),
         )
 
-        val expectedResponse = MockResponse()
-            .setResponseCode(HttpURLConnection.HTTP_OK)
-            .setBody(Gson().toJson(definition))
-        mockWebServer.enqueue(expectedResponse)
+        const val TEST_WORD_VALID = "hello"
+        const val TEST_WORD_INVALID = "hello-lloyds"
 
-        val actualResponse = apiHelper.getDefinition("hello")
-
-        assertEquals(actualResponse.body(), definition)
+        val TEST_DEFINITION = definition
     }
-
-    @Test
-    fun `get definition for an invalid word, api must return with http code 404`() = runTest {
-        val expectedResponse = MockResponse()
-            .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
-        mockWebServer.enqueue(expectedResponse)
-
-        val actualResponse = apiHelper.getDefinition("hello-android")
-        assertEquals(actualResponse.code(), HttpURLConnection.HTTP_NOT_FOUND)
-    }
-
-
-
 }

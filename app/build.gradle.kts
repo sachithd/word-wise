@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    //id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -16,6 +15,9 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,6 +42,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -49,8 +52,21 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+
+
+    //Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+
+
+    implementation("androidx.test:core-ktx:1.5.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    // To use Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:2.6.1")
+
 
     // Dependency Injection - Hilt
     //implementation("com.google.dagger:hilt-android:2.44")
@@ -69,16 +85,14 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    androidTestImplementation ("androidx.test:runner:1.5.2")
 
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
     //MockWebserver
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     // Needed for unit testing API
     testImplementation("androidx.arch.core:core-testing:2.2.0")
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
 }
