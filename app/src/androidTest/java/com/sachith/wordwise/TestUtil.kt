@@ -1,6 +1,6 @@
 package com.sachith.wordwise
 
-import com.sachith.wordwise.api.dto.DefinitionDto
+import com.sachith.wordwise.api.dto.Definition
 import com.sachith.wordwise.api.dto.Definitions
 import com.sachith.wordwise.api.dto.License
 import com.sachith.wordwise.api.dto.Meanings
@@ -97,7 +97,7 @@ class TestUtil {
         )
 
         private val definition = listOf(
-            DefinitionDto(
+            Definition(
                 word = "hello",
                 phonetics = ArrayList(phonetics),
                 meanings = ArrayList(meanings),

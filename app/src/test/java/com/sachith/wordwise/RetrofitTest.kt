@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.HttpURLConnection
 
-class ApiUnitTest {
+class RetrofitTest {
 
     private lateinit var mockWebServer: MockWebServer
     private lateinit var dictionaryApiInterface: DictionaryApiInterface

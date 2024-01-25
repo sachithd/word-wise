@@ -3,7 +3,7 @@ package com.sachith.wordwise.api.dto
 import com.google.gson.annotations.SerializedName
 
 
-data class DefinitionDto (
+data class Definition (
 
   @SerializedName("word"       ) var word       : String?              = null,
   @SerializedName("phonetic"   ) var phonetic   : String?              = null,

@@ -8,9 +8,21 @@ import com.sachith.wordwise.database.model.DefinitionModel
 
 @Dao
 interface DictionaryDao {
+
+    /**
+     * Insert one of more definition objects, replace if a duplicate entry
+     *
+     * @param definitionModel
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg definitionModel: DefinitionModel)
 
-    @Query("SELECT * FROM dictionary WHERE word = :mWord LIMIT 1")
+    /**
+     * Returns definitions for a given word
+     *
+     * @param mWord
+     * @return
+     */
+    @Query("SELECT * FROM dictionary WHERE word = :mWord")
     suspend fun getDefinition(mWord: String): List<DefinitionModel>
 }

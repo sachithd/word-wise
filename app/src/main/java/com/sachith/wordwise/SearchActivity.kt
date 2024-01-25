@@ -1,7 +1,7 @@
 package com.sachith.wordwise
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.sachith.wordwise.ui.search.SearchFragment
 
 class SearchActivity : AppCompatActivity() {

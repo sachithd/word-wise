@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a3dd19f9ab454c88039994ef30794557",
+    "identityHash": "a7ff83091f59fbcacc66edd628e65173",
     "entities": [
       {
         "tableName": "dictionary",
@@ -36,12 +36,12 @@
         "indices": [
           {
             "name": "idx_word",
-            "unique": false,
+            "unique": true,
             "columnNames": [
               "word"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `idx_word` ON `${TABLE_NAME}` (`word`)"
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `idx_word` ON `${TABLE_NAME}` (`word`)"
           }
         ],
         "foreignKeys": []
@@ -50,7 +50,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a3dd19f9ab454c88039994ef30794557')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a7ff83091f59fbcacc66edd628e65173')"
     ]
   }
 }

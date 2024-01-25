@@ -30,12 +30,24 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.search.SearchView
+            android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/searchbar_hint"
             app:layout_anchor="@id/search_bar">
             <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+
+            <TextView
+                android:id="@+id/textViewDefinition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:scrollbars = "vertical"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                />
         </com.google.android.material.search.SearchView>
+
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

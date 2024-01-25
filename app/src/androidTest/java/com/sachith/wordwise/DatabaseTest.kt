@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class DatabaseUnitTest : TestCase() {
+class DatabaseTest : TestCase() {
     private lateinit var dictionaryDao: DictionaryDao
     private lateinit var db: DictionaryDatabase
 

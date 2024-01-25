@@ -5,6 +5,12 @@ class DictionaryApiHelper (private val dictionaryApiInterface: DictionaryApiInte
         const val BASE_URL: String = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     }
 
+    /**
+     * Append the word to construct the end point
+     *
+     * @param mQuery
+     * @return full API end point
+     */
     private fun getDictionaryApiURL(mQuery: String): String {
         return "$BASE_URL$mQuery"
     }

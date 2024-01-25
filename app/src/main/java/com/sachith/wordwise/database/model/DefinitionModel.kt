@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "dictionary",
     indices = [
-        Index(name = "idx_word", value = ["word"]),
+        Index(name = "idx_word", value = ["word"], unique = true), //Creates a database index on word column
     ]
 )
 data class DefinitionModel(
